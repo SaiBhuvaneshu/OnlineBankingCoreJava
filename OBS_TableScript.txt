@@ -1,0 +1,177 @@
+
+
+
+
+create table ACCOUNT_MASTER
+(
+Account_ID NUMBER(10), 
+Account_Type VARCHAR2(25), 
+Account_Balance NUMBER(15) ,
+Open_Date DATE,
+constraint Account_master_Account_id_pk Primary key(account_id)
+);
+
+
+
+
+
+create table CUSTOMER
+(
+Account_ID NUMBER(10) , 
+customer_name VARCHAR2(50),
+Email VARCHAR2(30),
+Address VARCHAR2(100), 
+Pancard VARCHAR2(15),
+constraint customer_Account_id_fk foreign key(account_id) references account_master(account_id)
+);
+
+
+
+
+
+create table TRANSACTIONS
+(
+Transaction_ID NUMBER,
+Tran_description VARCHAR2(100),
+DateofTransaction DATE,
+TransactionType VARCHAR2(1),
+TranAmount NUMBER(15),
+Account_id NUMBER(10),
+constraint transactions_Account_id_fk foreign key(account_id) references account_master(account_id)
+);
+
+
+
+
+create table SERVICE_TRACKER
+(
+Service_ID NUMBER,
+Service_Description VARCHAR2(100),
+Account_ID NUMBER,
+Service_Raised_Date DATE,
+Service_status VARCHAR2(20),
+constraint service_tracker_Account_id_fk foreign key(account_id) references account_master(account_id)
+);
+
+
+
+
+
+create table USER_TABLE
+(Account_ID NUMBER,
+user_id NUMBER,
+login_password VARCHAR2(15),
+secret_question VARCHAR2(50),
+Transaction_password VARCHAR2(15),
+lock_status VARCHAR2(1),
+secret_answer varchar2(20),
+constraint user_table_Account_id_fk foreign key(account_id) references account_master(account_id)
+);
+
+
+
+
+create table PAYEETABLE
+(
+Account_Id NUMBER,
+Payee_Account_Id NUMBER,
+Nick_name VARCHAR2(40),
+constraint payee_table_Account_id_fk foreign key(account_id) references account_master(account_id)
+);
+
+
+
+create table FUND_TRANSFER
+(FundTransfer_ID NUMBER,
+Account_ID NUMBER(10),
+Payee_Account_ID NUMBER(10), 
+Date_Of_Transfer DATE,
+Transfer_Amount NUMBER(15),
+constraint ft_Account_id_fk foreign key(account_id) references account_master(account_id)
+);
+
+
+
+
+
+
+
+
+CREATE SEQUENCE seq_acc_id
+MINVALUE 1
+MAXVALUE 9999999999
+START WITH 10000
+INCREMENT BY 1
+;
+
+
+CREATE SEQUENCE seq_user_id
+MINVALUE 1
+MAXVALUE 9999999999
+START WITH 20000
+INCREMENT BY 1
+;
+
+
+
+CREATE SEQUENCE user_id
+MINVALUE 1
+MAXVALUE 9999999999
+START WITH 30000
+INCREMENT BY 1
+;
+
+
+
+CREATE SEQUENCE fundTransfer_id_seq
+MINVALUE 1
+MAXVALUE 9999999999
+START WITH 40000
+INCREMENT BY 1
+;
+
+
+
+CREATE SEQUENCE serviceid_sequence
+MINVALUE 1
+MAXVALUE 9999999999
+START WITH 50000
+INCREMENT BY 1
+;
+
+
+
+
+CREATE SEQUENCE transferId
+MINVALUE 1
+MAXVALUE 9999999999
+START WITH 60000
+INCREMENT BY 1
+;
+
+
+
+
+insert into account_master(10022,'savings',12000,'15-oct-18');
+
+insert into account_master(10023,'savings',12000,'15-oct-18');
+
+insert into account_master(10024,'savings',15000,'15-oct-18');
+
+
+insert into customer(10022,'shivam saraswat','shivamsaraswat@gmail.com','KANPUR UTTAR PRADESH');
+
+insert into customer(10023,'shivam saraswat','shivamsaraswat@gmail.com','KANPUR UTTAR PRADESH');
+
+insert into customer(10024,'SAI BHUVANESHU','saibhuvaneshu@gmail.com','hyderabad');
+
+
+insert into user_table(10022,157035,'shivam@96','What is your birth place? ','U','kanpur');
+insert into user_table(10023,157035,'shivam@96','What is your birth place? ','U','kanpur');
+insert into user_table(10024,157084,'sai@98','What is your birth place? ','U','hyderabad');
+
+
+
+
+
+
